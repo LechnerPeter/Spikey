@@ -1,0 +1,29 @@
+{
+    "name": "ThronStrike",
+    "parameter": [
+        {
+            "name": "Räder",
+            "type": "int",
+            "default": 4
+        }
+    ],
+    "children": [
+        {
+            "name": "testasd"
+        },
+        {
+            "name": "SwitchTest",
+            "type": "switch",
+            "input": [
+                "Main",
+                "GPIOManager",
+                "GPIO22"
+            ],
+            "output": [
+                "Main",
+                "GPIOManager",
+                "GPIO23"
+            ]
+        }
+    ]
+}
