@@ -25,7 +25,7 @@ class Hardware extends Component {
       initialised.value = false;
       return false;
     }
-    final component = Loader.load(json);
+    final component = Loader.load(json, path.sublist(0, path.length - 1));
     children.addAll(component.children);
     parameter.addAll(component.parameter);
     initialised.value = true;

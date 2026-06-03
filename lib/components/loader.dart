@@ -41,7 +41,7 @@ class Loader {
         );
         return Switch(
           name: name,
-          parentPath: path,
+          parentPath: parent,
           parameter: parameter,
           children: children,
           input: input,
@@ -50,7 +50,7 @@ class Loader {
       default:
         return Component(
           name: name,
-          parentPath: path,
+          parentPath: parent,
           parameter: parameter,
           children: children,
         );

@@ -13,6 +13,8 @@ class ComponentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text(component.name),
+        Text(component.path.toString()),
         Wrap(
           children: [for (var fun in component.functions) _Function(fun: fun)],
         ),

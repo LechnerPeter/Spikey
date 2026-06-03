@@ -118,7 +118,7 @@ class _Components extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selected = useState<Component?>(null);
+    final selected = useState<Component>(Data.instance.main);
     return Row(
       crossAxisAlignment: .start,
       children: [
@@ -133,9 +133,7 @@ class _Components extends HookWidget {
         Expanded(
           child: Container(
             color: Colors.lightGreen.shade200,
-            child: selected.value == null
-                ? Center(child: Text("Nothing selected"))
-                : ComponentView(component: selected.value!),
+            child: ComponentView(component: selected.value),
           ),
         ),
       ],
