@@ -122,11 +122,12 @@ class _Components extends HookWidget {
     return Row(
       crossAxisAlignment: .start,
       children: [
-        SingleChildScrollView(
-          child: Container(
-            width: 200,
-            padding: .all(5),
-            color: Colors.green.shade200,
+        Container(
+          width: 200,
+          height: MediaQuery.of(context).size.height,
+          padding: .all(5),
+          color: Colors.green.shade200,
+          child: SingleChildScrollView(
             child: ComponentTree(component: main, selected: selected),
           ),
         ),

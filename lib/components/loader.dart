@@ -33,12 +33,8 @@ class Loader {
     String? type = json["type"];
     switch (type) {
       case "switch":
-        final input = Data.instance.getComponent<IO_Read_Component>(
-          json["input"],
-        );
-        final output = Data.instance.getComponent<IO_Write_Component>(
-          json["output"],
-        );
+        final input = Data.getComponent<IO_Read_Component>(json["input"]);
+        final output = Data.getComponent<IO_Write_Component>(json["output"]);
         return Switch(
           name: name,
           parentPath: parent,
@@ -48,6 +44,9 @@ class Loader {
           output: output,
         );
       default:
+        if (type != null) {
+          Logging.error("Type $type not found using base component instead");
+        }
         return Component(
           name: name,
           parentPath: parent,

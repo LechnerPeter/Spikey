@@ -44,6 +44,7 @@ class I2C_PWM_Component extends PWM_Base_Component {
 
   @override
   void setFrequency(int freq) {
+    // This writes frequency to all pwm channels
     masterState(false);
     i2c.writeBytesReg(address, 0x04, [(freq >> 8) & 0xFF, freq & 0xFF]);
     masterState(true);

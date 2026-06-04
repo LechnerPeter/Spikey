@@ -12,8 +12,8 @@ class Data {
 
   final MainComponent main = MainComponent();
 
-  T getComponent<T extends Component>(List path) {
-    Component ret = main;
+  static T getComponent<T extends Component>(List path) {
+    Component ret = Data.instance.main;
     for (var str in path.skip(1)) {
       ret = ret.children.singleWhere((c) => c.name == str.toString());
     }
