@@ -1,5 +1,6 @@
 # User
 logs/*
+configs/*
 
 # Miscellaneous
 *.class
