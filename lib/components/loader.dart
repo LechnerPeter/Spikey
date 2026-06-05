@@ -4,10 +4,6 @@ import 'dart:io';
 import 'package:thornstrike/components/component.dart';
 import 'package:thornstrike/components/generic/analog_pwm_connector.dart';
 import 'package:thornstrike/components/generic/switch.dart';
-import 'package:thornstrike/components/io/adc/adc.dart';
-import 'package:thornstrike/components/io/gpio/io.dart';
-import 'package:thornstrike/components/io/pwm/pwm_base.dart';
-import 'package:thornstrike/data.dart';
 import 'package:thornstrike/logging.dart';
 
 import 'parameter.dart';
@@ -36,26 +32,20 @@ class Loader {
     String? type = json["type"];
     switch (type) {
       case "switch":
-        final input = Data.getComponent<IOReadComponent>(json["input"]);
-        final output = Data.getComponent<IOWriteComponent>(json["output"]);
-        return Switch(
+        return Switch.create(
           name: name,
           parentPath: parent,
           parameter: parameter,
           children: children,
-          input: input,
-          output: output,
+          json: json,
         );
       case "connector":
-        final pwm = Data.getComponent<PwmBaseComponent>(json["pwm"]);
-        final adc = Data.getComponent<ADC>(json["adc"]);
-        return AnalogPwmConnector(
+        return AnalogPwmConnector.create(
           name: name,
           parentPath: parent,
           parameter: parameter,
           children: children,
-          pwm: pwm,
-          adc: adc,
+          json: json,
         );
       default:
         if (type != null) {

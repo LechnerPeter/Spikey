@@ -18,7 +18,7 @@ class Logging {
     var timeStr = time.hour.toString().padLeft(2, '0');
     timeStr += ":${time.minute.toString().padLeft(2, '0')}";
     timeStr += ":${time.second.toString().padLeft(2, '0')}";
-    timeStr += ".${time.millisecond.toString().padLeft(4, '0')}";
+    timeStr += ".${time.millisecond.toString().padLeft(3, '0')}";
     final fullStr = "[$timeStr] ${levelToStr[level]} $info";
     file.writeAsStringSync("$fullStr\n", mode: .append);
     if (consolePrint && kDebugMode) debugPrint(fullStr);

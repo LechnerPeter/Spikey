@@ -24,6 +24,7 @@ class PwmI2CComponent extends PwmBaseComponent {
   void setDuty(double duty) {
     if (!enabled.value) duty = 0;
     duty *= 100;
+    duty = duty.clamp(0, 100);
     i2c.writeBytesReg(address, 0x06 + index * 2, [
       duty.toInt(),
       (duty * 10 % 10).round(),
