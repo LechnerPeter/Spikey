@@ -14,12 +14,6 @@ class ADCoverI2C extends ADC {
     i2c.writeByteReg(address, 14, 0x01);
     _stream = createStream();
     _stream.listen((data) => state.value = data);
-    widgets.addAll([
-      ComponentWidget(
-        name: "State",
-        builder: (c) => _State(adc: this),
-      ),
-    ]);
   }
 
   final i2c = I2C(1);

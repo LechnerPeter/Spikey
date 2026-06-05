@@ -12,6 +12,20 @@
             "name": "testasd"
         },
         {
+            "name": "Connector Test",
+            "type": "connector",
+            "pwm": [
+                "Main",
+                "GPIOManager",
+                "PWM0"
+            ],
+            "adc": [
+                "Main",
+                "GPIOManager",
+                "ADC0"
+            ]
+        },
+        {
             "name": "SwitchTest",
             "type": "switch",
             "input": [

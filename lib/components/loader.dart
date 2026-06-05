@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:thornstrike/components/component.dart';
+import 'package:thornstrike/components/generic/analog_pwm_connector.dart';
 import 'package:thornstrike/components/generic/switch.dart';
+import 'package:thornstrike/components/io/adc/adc.dart';
 import 'package:thornstrike/components/io/gpio/io.dart';
+import 'package:thornstrike/components/io/pwm/pwm_base.dart';
 import 'package:thornstrike/data.dart';
 import 'package:thornstrike/logging.dart';
 
@@ -42,6 +45,17 @@ class Loader {
           children: children,
           input: input,
           output: output,
+        );
+      case "connector":
+        final pwm = Data.getComponent<PWM_Base_Component>(json["pwm"]);
+        final adc = Data.getComponent<ADC>(json["adc"]);
+        return AnalogPwmConnector(
+          name: name,
+          parentPath: parent,
+          parameter: parameter,
+          children: children,
+          pwm: pwm,
+          adc: adc,
         );
       default:
         if (type != null) {

@@ -64,7 +64,7 @@ class IOManager extends Component {
       for (var i in [0, 1, 2, 3]) {
         children.add(
           I2C_PWM_Component(
-            name: "I2C -PWM $i",
+            name: "PWM$i",
             parentPath: path,
             i2c: I2C(1),
             index: i,
