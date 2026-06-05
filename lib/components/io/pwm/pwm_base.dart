@@ -3,9 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:thornstrike/components/component.dart';
 import 'package:thornstrike/components/parameter.dart';
 
-// ignore: camel_case_types
-abstract class PWM_Base_Component extends Component {
-  PWM_Base_Component({required super.name, required super.parentPath}) {
+abstract class PwmBaseComponent extends Component {
+  PwmBaseComponent({required super.name, required super.parentPath}) {
     parameter.add(frequency);
     parameter.add(duty);
     parameter.add(enabled);
@@ -51,7 +50,7 @@ abstract class PWM_Base_Component extends Component {
 class _Slider extends HookWidget {
   const _Slider({required this.pwm});
 
-  final PWM_Base_Component pwm;
+  final PwmBaseComponent pwm;
 
   @override
   Widget build(BuildContext context) {

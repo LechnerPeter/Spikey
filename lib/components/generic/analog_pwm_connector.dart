@@ -14,6 +14,6 @@ class AnalogPwmConnector extends Component {
     adc.state.addListener(() => pwm.duty.value = adc.normalized);
   }
 
-  final PWM_Base_Component pwm;
+  final PwmBaseComponent pwm;
   final ADC adc;
 }

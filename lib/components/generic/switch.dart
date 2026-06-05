@@ -15,6 +15,6 @@ class Switch extends Component {
     references.addAll([input, output]);
   }
 
-  final IO_Read_Component input;
-  final IO_Write_Component output;
+  final IOReadComponent input;
+  final IOWriteComponent output;
 }

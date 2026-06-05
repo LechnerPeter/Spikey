@@ -1,9 +1,8 @@
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:thornstrike/components/io/gpio/io.dart';
 
-// ignore: camel_case_types
-class RPI_Read_Component extends IO_Read_Component {
-  RPI_Read_Component({
+class RpiReadComponent extends IOReadComponent {
+  RpiReadComponent({
     required super.name,
     required super.parentPath,
     required this.index,
@@ -31,9 +30,8 @@ class RPI_Read_Component extends IO_Read_Component {
   }
 }
 
-// ignore: camel_case_types
-class RPI_Write_Component extends IO_Write_Component {
-  RPI_Write_Component({
+class RpiWriteComponent extends IOWriteComponent {
+  RpiWriteComponent({
     required super.name,
     required super.parentPath,
     required this.index,

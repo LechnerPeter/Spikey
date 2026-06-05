@@ -36,8 +36,8 @@ class Loader {
     String? type = json["type"];
     switch (type) {
       case "switch":
-        final input = Data.getComponent<IO_Read_Component>(json["input"]);
-        final output = Data.getComponent<IO_Write_Component>(json["output"]);
+        final input = Data.getComponent<IOReadComponent>(json["input"]);
+        final output = Data.getComponent<IOWriteComponent>(json["output"]);
         return Switch(
           name: name,
           parentPath: parent,
@@ -47,7 +47,7 @@ class Loader {
           output: output,
         );
       case "connector":
-        final pwm = Data.getComponent<PWM_Base_Component>(json["pwm"]);
+        final pwm = Data.getComponent<PwmBaseComponent>(json["pwm"]);
         final adc = Data.getComponent<ADC>(json["adc"]);
         return AnalogPwmConnector(
           name: name,

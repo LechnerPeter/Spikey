@@ -5,9 +5,8 @@ import 'package:thornstrike/logging.dart';
 
 //TODO I2C should not live in here
 
-// ignore: camel_case_types
-class I2C_PWM_Component extends PWM_Base_Component {
-  I2C_PWM_Component({
+class PwmI2CComponent extends PwmBaseComponent {
+  PwmI2CComponent({
     required super.name,
     required super.parentPath,
     required this.i2c,

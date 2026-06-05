@@ -1,9 +1,8 @@
 import 'package:thornstrike/components/component.dart';
 import 'package:thornstrike/components/io/gpio/io.dart';
 
-// ignore: camel_case_types
-class Dummy_Read_Component extends IO_Read_Component {
-  Dummy_Read_Component({required super.name, required super.parentPath}) {
+class DummyReadComponent extends IOReadComponent {
+  DummyReadComponent({required super.name, required super.parentPath}) {
     functions.addAll([
       ComponentFunction(name: "Fake ON", function: () => state.value = true),
       ComponentFunction(name: "Fake OFF", function: () => state.value = false),
@@ -29,9 +28,8 @@ class Dummy_Read_Component extends IO_Read_Component {
   }
 }
 
-// ignore: camel_case_types
-class Dummy_Write_Component extends IO_Write_Component {
-  Dummy_Write_Component({required super.name, required super.parentPath});
+class DummyWriteComponent extends IOWriteComponent {
+  DummyWriteComponent({required super.name, required super.parentPath});
 
   @override
   void turnOn() {}

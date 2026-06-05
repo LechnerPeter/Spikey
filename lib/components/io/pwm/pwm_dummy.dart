@@ -1,8 +1,7 @@
 import 'package:thornstrike/components/io/pwm/pwm_base.dart';
 
-// ignore: camel_case_types
-class Dummy_Pwm extends PWM_Base_Component {
-  Dummy_Pwm({required super.name, required super.parentPath});
+class DummyPwm extends PwmBaseComponent {
+  DummyPwm({required super.name, required super.parentPath});
 
   @override
   void init() {}

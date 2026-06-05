@@ -51,8 +51,8 @@ class IOManager extends Component {
         if ([2, 3, 18, 19].contains(i)) continue;
         children.add(
           i.isEven
-              ? RPI_Read_Component(name: "GPIO$i", parentPath: path, index: i)
-              : RPI_Write_Component(name: "GPIO$i", parentPath: path, index: i),
+              ? RpiReadComponent(name: "GPIO$i", parentPath: path, index: i)
+              : RpiWriteComponent(name: "GPIO$i", parentPath: path, index: i),
         );
       }
       return false;
@@ -64,8 +64,8 @@ class IOManager extends Component {
 
         children.add(
           i.isEven
-              ? Dummy_Read_Component(name: "GPIO$i", parentPath: path)
-              : Dummy_Write_Component(name: "GPIO$i", parentPath: path),
+              ? DummyReadComponent(name: "GPIO$i", parentPath: path)
+              : DummyWriteComponent(name: "GPIO$i", parentPath: path),
         );
       }
     }
@@ -76,7 +76,7 @@ class IOManager extends Component {
     try {
       for (var i in [0, 1, 2, 3]) {
         children.add(
-          I2C_PWM_Component(
+          PwmI2CComponent(
             name: "PWM$i",
             parentPath: path,
             i2c: I2C(1),
@@ -89,7 +89,7 @@ class IOManager extends Component {
       Logging.error(e.toString());
       Logging.warning("Adding dummy PWM instead of the I2C pwms");
       for (var i in [0, 1, 2, 3]) {
-        children.add(Dummy_Pwm(name: "PWM$i", parentPath: path));
+        children.add(DummyPwm(name: "PWM$i", parentPath: path));
       }
     }
     return false;
@@ -99,17 +99,13 @@ class IOManager extends Component {
     try {
       for (int i in [2, 3]) {
         children.add(
-          PWM_Rpi_Component(
-            name: "RPI PWM $i",
-            parentPath: path,
-            pwm: PWM(0, i),
-          ),
+          RpiPwmComponent(name: "RPI PWM $i", parentPath: path, pwm: PWM(0, i)),
         );
       }
       return true;
     } catch (e) {
       for (int i in [2, 3]) {
-        children.add(Dummy_Pwm(name: "RPI PWM $i", parentPath: path));
+        children.add(DummyPwm(name: "RPI PWM $i", parentPath: path));
       }
     }
     return false;

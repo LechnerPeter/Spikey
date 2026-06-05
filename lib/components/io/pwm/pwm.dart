@@ -3,9 +3,8 @@ import 'package:thornstrike/components/component.dart';
 import 'package:thornstrike/components/io/pwm/pwm_base.dart';
 import 'package:thornstrike/logging.dart';
 
-// ignore: camel_case_types
-class PWM_Rpi_Component extends PWM_Base_Component {
-  PWM_Rpi_Component({
+class RpiPwmComponent extends PwmBaseComponent {
+  RpiPwmComponent({
     required super.name,
     required super.parentPath,
     required this.pwm,

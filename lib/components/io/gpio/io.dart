@@ -5,9 +5,8 @@ import 'package:thornstrike/logging.dart';
 
 import '../../parameter.dart';
 
-// ignore: camel_case_types
-abstract class IO_Read_Component extends Component {
-  IO_Read_Component({required super.name, required super.parentPath}) {
+abstract class IOReadComponent extends Component {
+  IOReadComponent({required super.name, required super.parentPath}) {
     parameter.add(state);
     functions.addAll([
       ComponentFunction(
@@ -30,7 +29,7 @@ abstract class IO_Read_Component extends Component {
 class _Read extends HookWidget {
   const _Read({required this.gpio});
 
-  final IO_Read_Component gpio;
+  final IOReadComponent gpio;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +46,8 @@ class _Read extends HookWidget {
   }
 }
 
-// ignore: camel_case_types
-abstract class IO_Write_Component extends Component {
-  IO_Write_Component({required super.name, required super.parentPath}) {
+abstract class IOWriteComponent extends Component {
+  IOWriteComponent({required super.name, required super.parentPath}) {
     parameter.add(state);
 
     state.addListener(() => state.value ? turnOn() : turnOff());
@@ -76,7 +74,7 @@ abstract class IO_Write_Component extends Component {
 class _Write extends HookWidget {
   const _Write({required this.gpio});
 
-  final IO_Write_Component gpio;
+  final IOWriteComponent gpio;
 
   @override
   Widget build(BuildContext context) {
