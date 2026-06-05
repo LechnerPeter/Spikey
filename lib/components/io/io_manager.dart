@@ -10,8 +10,8 @@ import 'package:thornstrike/components/io/pwm/pwm_i2c.dart';
 import 'package:thornstrike/components/io/pwm/pwm.dart';
 import 'package:thornstrike/logging.dart';
 
-class IOManager extends Component {
-  IOManager({required super.name, required super.parentPath}) {
+class DFRobotIOHat extends Component {
+  DFRobotIOHat({required super.name, required super.parentPath}) {
     _initADC();
     _initI2CPWM();
     _initRPIPWM();
@@ -19,6 +19,7 @@ class IOManager extends Component {
   }
 
   final ready = ValueNotifier(false);
+  final i2c = I2C(1);
 
   bool _initADC() {
     try {
@@ -28,11 +29,13 @@ class IOManager extends Component {
             name: "ADC$i",
             parentPath: path,
             index: i,
+            i2c: i2c,
             min: 0,
             max: 4095,
           ),
         );
       }
+      Logging.info("ADC Done");
       return true;
     } catch (e) {
       Logging.error(e.toString());
@@ -55,13 +58,13 @@ class IOManager extends Component {
               : RpiWriteComponent(name: "GPIO$i", parentPath: path, index: i),
         );
       }
+      Logging.info("IO Done");
       return false;
     } catch (e) {
       for (int i = 1; i <= 26; i++) {
         if ([2, 3, 18, 19].contains(i)) {
           continue; // 2,3 are i2c 18,19 are the onboard pwm
         }
-
         children.add(
           i.isEven
               ? DummyReadComponent(name: "GPIO$i", parentPath: path)
@@ -76,14 +79,10 @@ class IOManager extends Component {
     try {
       for (var i in [0, 1, 2, 3]) {
         children.add(
-          PwmI2CComponent(
-            name: "PWM$i",
-            parentPath: path,
-            i2c: I2C(1),
-            index: i,
-          ),
+          PwmI2CComponent(name: "PWM$i", parentPath: path, i2c: i2c, index: i),
         );
       }
+      Logging.info("PWM Done");
       return true;
     } catch (e) {
       Logging.error(e.toString());

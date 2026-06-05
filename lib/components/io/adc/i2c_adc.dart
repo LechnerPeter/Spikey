@@ -9,13 +9,14 @@ class ADCoverI2C extends ADC {
     required this.index,
     required super.min,
     required super.max,
+    required this.i2c,
   }) {
     i2c.writeByteReg(address, 14, 0x01);
     _stream = createStream();
     _stream.listen((data) => state.value = data);
   }
 
-  final i2c = I2C(1);
+  final I2C i2c;
   final address = 0x10;
   final int index;
   late final Stream<int> _stream;

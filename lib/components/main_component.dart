@@ -18,7 +18,7 @@ class MainComponent extends Component {
     );
     children.add(hardware);
     Logging.info("HW Done ");
-    gpioManager = IOManager(name: "GPIOManager", parentPath: path);
+    gpioManager = DFRobotIOHat(name: "GPIOManager", parentPath: path);
     children.add(gpioManager);
     Logging.info("GPIODone");
     settings = UISettings(name: "UISettings", parentPath: path);
@@ -27,6 +27,6 @@ class MainComponent extends Component {
   }
 
   late final Hardware hardware;
-  late final IOManager gpioManager;
+  late final DFRobotIOHat gpioManager;
   late final UISettings settings;
 }

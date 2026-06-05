@@ -3,8 +3,6 @@ import 'package:thornstrike/components/component.dart';
 import 'package:thornstrike/components/io/pwm/pwm_base.dart';
 import 'package:thornstrike/logging.dart';
 
-//TODO I2C should not live in here
-
 class PwmI2CComponent extends PwmBaseComponent {
   PwmI2CComponent({
     required super.name,
