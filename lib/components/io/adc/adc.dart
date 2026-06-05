@@ -4,7 +4,12 @@ import 'package:thornstrike/components/component.dart';
 import 'package:thornstrike/logging.dart';
 
 class ADC extends Component {
-  ADC({required super.name, required super.parentPath}) {
+  ADC({
+    required super.name,
+    required super.parentPath,
+    required this.min,
+    required this.max,
+  }) {
     functions.addAll([
       ComponentFunction(
         name: "Read",
@@ -21,6 +26,10 @@ class ADC extends Component {
   }
 
   final state = ValueNotifier<int>(0);
+  final num min;
+  final num max;
+
+  double get normalized => state.value / (max - min);
 }
 
 class _State extends HookWidget {

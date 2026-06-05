@@ -1,6 +1,7 @@
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:flutter/widgets.dart';
 import 'package:thornstrike/components/component.dart';
+import 'package:thornstrike/components/io/adc/adc_dummy.dart';
 import 'package:thornstrike/components/io/adc/i2c_adc.dart';
 import 'package:thornstrike/components/io/gpio/io_dummy.dart';
 import 'package:thornstrike/components/io/gpio/rpi_io.dart';
@@ -22,11 +23,23 @@ class IOManager extends Component {
   bool _initADC() {
     try {
       for (int i in [0, 1, 2, 3]) {
-        children.add(ADCoverI2C(name: "ADC$i", parentPath: path, index: i));
+        children.add(
+          ADCoverI2C(
+            name: "ADC$i",
+            parentPath: path,
+            index: i,
+            min: 0,
+            max: 4095,
+          ),
+        );
       }
       return true;
     } catch (e) {
       Logging.error(e.toString());
+      Logging.warning("Using ADC dummies");
+      for (int i in [0, 1, 2, 3]) {
+        children.add(ADCDummy(name: "ADC$i", parentPath: path));
+      }
     }
     return false;
   }
@@ -76,7 +89,7 @@ class IOManager extends Component {
       Logging.error(e.toString());
       Logging.warning("Adding dummy PWM instead of the I2C pwms");
       for (var i in [0, 1, 2, 3]) {
-        children.add(Dummy_Pwm(name: "I2C -PWM $i", parentPath: path));
+        children.add(Dummy_Pwm(name: "PWM$i", parentPath: path));
       }
     }
     return false;

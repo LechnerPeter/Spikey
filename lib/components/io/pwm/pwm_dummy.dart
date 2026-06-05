@@ -5,7 +5,7 @@ class Dummy_Pwm extends PWM_Base_Component {
   Dummy_Pwm({required super.name, required super.parentPath});
 
   @override
-  void init_() {}
+  void init() {}
 
   @override
   void setDuty(double duty) {}

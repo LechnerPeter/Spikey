@@ -21,7 +21,7 @@ class PWM_Rpi_Component extends PWM_Base_Component {
   final PWM pwm;
 
   @override
-  void init_() {
+  void init() {
     setDuty(duty.value);
     setFrequency(frequency.value);
     setEnabled(enabled.value);

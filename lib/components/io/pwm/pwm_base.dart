@@ -12,10 +12,10 @@ abstract class PWM_Base_Component extends Component {
 
     enabled.addListener(() => setEnabled(enabled.value));
     frequency.addListener(() => setFrequency(frequency.value));
-    duty.addListener(() => setDuty(duty.value));
+    duty.addListener(() => setDuty(duty.value.clamp(0, 1)));
 
     // init
-    init_();
+    init();
 
     functions.addAll([
       ComponentFunction(name: "ON", function: () => enabled.value = true),
@@ -42,7 +42,7 @@ abstract class PWM_Base_Component extends Component {
   final duty = Parameter<double>(name: "Duty", value: 0.5);
   final enabled = Parameter<bool>(name: "Enabled", value: false);
 
-  void init_();
+  void init();
   void setEnabled(bool state);
   void setDuty(double duty);
   void setFrequency(int freq);

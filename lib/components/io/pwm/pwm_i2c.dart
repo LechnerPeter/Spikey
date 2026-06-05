@@ -52,7 +52,7 @@ class I2C_PWM_Component extends PWM_Base_Component {
   }
 
   @override
-  void init_() {
+  void init() {
     final pid = i2c.readByteReg(address, 0x01);
     final vid = i2c.readByteReg(address, 0x02);
     if (pid == 223 && vid == 16) {
