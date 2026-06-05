@@ -13,6 +13,7 @@ class Data {
   final MainComponent main = MainComponent();
 
   static T getComponent<T extends Component>(List path) {
+    // TODO add erorr handling
     Component ret = Data.instance.main;
     for (var str in path.skip(1)) {
       ret = ret.children.singleWhere((c) => c.name == str.toString());

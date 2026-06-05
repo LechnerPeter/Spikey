@@ -1,6 +1,7 @@
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:flutter/widgets.dart';
 import 'package:thornstrike/components/component.dart';
+import 'package:thornstrike/components/io/adc/adc.dart';
 import 'package:thornstrike/components/io/gpio/io_dummy.dart';
 import 'package:thornstrike/components/io/gpio/rpi_io.dart';
 import 'package:thornstrike/components/io/pwm/pwm_dummy.dart';
@@ -10,12 +11,25 @@ import 'package:thornstrike/logging.dart';
 
 class IOManager extends Component {
   IOManager({required super.name, required super.parentPath}) {
+    _initADC();
     _initI2CPWM();
     _initRPIPWM();
     _initGPIO();
   }
 
   final ready = ValueNotifier(false);
+
+  bool _initADC() {
+    try {
+      for (int i in [0, 1, 2, 3]) {
+        children.add(ADC(name: "ADC$i", parentPath: path, index: i));
+      }
+      return true;
+    } catch (e) {
+      Logging.error(e.toString());
+    }
+    return false;
+  }
 
   bool _initGPIO() {
     try {
