@@ -12,13 +12,41 @@ class ComponentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: .start,
       children: [
-        Text(component.name),
+        Row(
+          children: [
+            SizedBox(width: 150, child: Text(component.name)),
+            Text(component.runtimeType.toString()),
+          ],
+        ),
         Text(component.path.toString()),
         Wrap(
           children: [for (var fun in component.functions) _Function(fun: fun)],
         ),
         for (var p in component.parameter) ParameterWidget(parameter: p),
+        if (component.references.isNotEmpty) const Text("References"),
+        for (var r in component.references.entries)
+          _Reference(reference: r.key, component: r.value),
+      ],
+    );
+  }
+}
+
+class _Reference extends StatelessWidget {
+  const _Reference({required this.reference, required this.component});
+
+  final String reference;
+  final Component component;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 20,
+      children: [
+        SizedBox(width: 60, child: Text(reference)),
+        Text("->"),
+        Text(component.name),
       ],
     );
   }

@@ -1,17 +1,18 @@
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:flutter/widgets.dart';
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/io/adc/adc_dummy.dart';
-import 'package:thornstrike/components/io/adc/i2c_adc.dart';
-import 'package:thornstrike/components/io/gpio/io_dummy.dart';
-import 'package:thornstrike/components/io/gpio/rpi_io.dart';
-import 'package:thornstrike/components/io/pwm/pwm_dummy.dart';
-import 'package:thornstrike/components/io/pwm/pwm_i2c.dart';
-import 'package:thornstrike/components/io/pwm/pwm.dart';
-import 'package:thornstrike/logging.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/io/adc/adc_dummy.dart';
+import 'package:spikey/components/io/adc/i2c_adc.dart';
+import 'package:spikey/components/io/gpio/io_dummy.dart';
+import 'package:spikey/components/io/gpio/rpi_io.dart';
+import 'package:spikey/components/io/pwm/pwm_dummy.dart';
+import 'package:spikey/components/io/pwm/pwm_i2c.dart';
+import 'package:spikey/components/io/pwm/pwm.dart';
+import 'package:spikey/logging.dart';
 
 class DFRobotIOHat extends Component {
   DFRobotIOHat({required super.name, required super.parentPath}) {
+    _initI2C();
     _initADC();
     _initI2CPWM();
     _initRPIPWM();
@@ -19,17 +20,28 @@ class DFRobotIOHat extends Component {
   }
 
   final ready = ValueNotifier(false);
-  final i2c = I2C(1);
+  I2C? i2c;
+
+  bool _initI2C() {
+    try {
+      i2c = I2C(1);
+      return true;
+    } catch (e) {
+      Logging.error(e.toString());
+      return false;
+    }
+  }
 
   bool _initADC() {
     try {
+      if (i2c == null) throw Exception("ADC init requires I2C");
       for (int i in [0, 1, 2, 3]) {
         children.add(
           ADCoverI2C(
             name: "ADC$i",
             parentPath: path,
             index: i,
-            i2c: i2c,
+            i2c: i2c!,
             min: 0,
             max: 4095,
           ),
@@ -59,7 +71,7 @@ class DFRobotIOHat extends Component {
         );
       }
       Logging.info("IO Done");
-      return false;
+      return true;
     } catch (e) {
       for (int i = 1; i <= 26; i++) {
         if ([2, 3, 18, 19].contains(i)) {
@@ -72,14 +84,15 @@ class DFRobotIOHat extends Component {
         );
       }
     }
-    return true;
+    return false;
   }
 
   bool _initI2CPWM() {
     try {
+      if (i2c == null) throw Exception("ADC init requires I2C");
       for (var i in [0, 1, 2, 3]) {
         children.add(
-          PwmI2CComponent(name: "PWM$i", parentPath: path, i2c: i2c, index: i),
+          PwmI2CComponent(name: "PWM$i", parentPath: path, i2c: i2c!, index: i),
         );
       }
       Logging.info("PWM Done");

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/data.dart';
-import 'package:thornstrike/logging.dart';
-import 'package:thornstrike/widgets/popup.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/data.dart';
+import 'package:spikey/logging.dart';
+import 'package:spikey/widgets/popup.dart';
 import 'widgets/component_view.dart';
 import 'widgets/component_tree.dart';
 
@@ -16,18 +16,12 @@ void main() async {
   Logging.warning("Test Warning");
   Logging.error("Test Error");
   WidgetsFlutterBinding.ensureInitialized();
-  /*
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('ThornStrike');
-    setWindowFrame(const Rect.fromLTRB(0, 0, 800, 480 + 55));
-  }
-  */
   Data.memory = await SharedPreferences.getInstance();
-  runApp(const ThornStrike());
+  runApp(const Spikey());
 }
 
-class ThornStrike extends HookWidget {
-  const ThornStrike({super.key});
+class Spikey extends HookWidget {
+  const Spikey({super.key});
 
   final duration = Durations.medium1;
   final curve = Curves.easeInOut;
@@ -38,7 +32,7 @@ class ThornStrike extends HookWidget {
     final pc = usePageController();
     final page = useState<int>(0);
     return MaterialApp(
-      title: 'ThornStrike',
+      title: 'Spikey',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.green)),
       home: RotatedBox(
         quarterTurns: main.settings.rotation.value,

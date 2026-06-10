@@ -1,7 +1,7 @@
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/io/gpio/io.dart';
-import 'package:thornstrike/components/parameter.dart';
-import 'package:thornstrike/data.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/io/gpio/io.dart';
+import 'package:spikey/components/parameter.dart';
+import 'package:spikey/data.dart';
 
 class Switch extends Component {
   Switch({
@@ -14,7 +14,7 @@ class Switch extends Component {
     required this.output,
   }) {
     input.state.addListener(() => output.state.value = input.state.value);
-    references.addAll([input, output]);
+    references.addAll({"Input": input, "Output": output});
   }
 
   final IOReadComponent input;

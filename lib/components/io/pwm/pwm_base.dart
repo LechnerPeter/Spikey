@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/parameter.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/parameter.dart';
 
 abstract class PwmBaseComponent extends Component {
   PwmBaseComponent({required super.name, required super.parentPath}) {

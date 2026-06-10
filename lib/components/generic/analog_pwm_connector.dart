@@ -1,8 +1,8 @@
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/io/adc/adc.dart';
-import 'package:thornstrike/components/io/pwm/pwm_base.dart';
-import 'package:thornstrike/components/parameter.dart';
-import 'package:thornstrike/data.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/io/adc/adc.dart';
+import 'package:spikey/components/io/pwm/pwm_base.dart';
+import 'package:spikey/components/parameter.dart';
+import 'package:spikey/data.dart';
 
 class AnalogPwmConnector extends Component {
   AnalogPwmConnector({
@@ -14,6 +14,7 @@ class AnalogPwmConnector extends Component {
     required this.adc,
   }) {
     adc.state.addListener(() => pwm.duty.value = adc.normalized);
+    references.addAll({"ADC": adc, "PWM": pwm});
   }
 
   final PwmBaseComponent pwm;

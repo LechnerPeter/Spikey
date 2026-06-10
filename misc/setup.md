@@ -1,4 +1,4 @@
-# Setup rpi for thornstrike
+# Setup rpi for spikey
 ## On the rpi
 make user spikey:spikey
 activate ssh

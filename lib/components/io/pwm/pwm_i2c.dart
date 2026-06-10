@@ -1,7 +1,7 @@
 import 'package:dart_periphery/dart_periphery.dart';
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/io/pwm/pwm_base.dart';
-import 'package:thornstrike/logging.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/io/pwm/pwm_base.dart';
+import 'package:spikey/logging.dart';
 
 class PwmI2CComponent extends PwmBaseComponent {
   PwmI2CComponent({

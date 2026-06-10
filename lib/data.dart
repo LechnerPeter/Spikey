@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/main_component.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/main_component.dart';
 
 class Data {
   // Singelton

@@ -1,5 +1,5 @@
 import 'package:dart_periphery/dart_periphery.dart';
-import 'package:thornstrike/components/io/gpio/io.dart';
+import 'package:spikey/components/io/gpio/io.dart';
 
 class RpiReadComponent extends IOReadComponent {
   RpiReadComponent({

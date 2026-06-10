@@ -1,4 +1,4 @@
-import 'package:thornstrike/components/component.dart';
+import 'package:spikey/components/component.dart';
 
 import 'parameter.dart';
 
@@ -12,7 +12,7 @@ class UISettings extends Component {
 
     visualName = PersistentParameter<String>(
       name: "VisualName",
-      value: "ThornStrike",
+      value: "Spikey",
       parentPath: path,
     );
 

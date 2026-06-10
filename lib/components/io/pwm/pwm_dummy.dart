@@ -1,4 +1,4 @@
-import 'package:thornstrike/components/io/pwm/pwm_base.dart';
+import 'package:spikey/components/io/pwm/pwm_base.dart';
 
 class DummyPwm extends PwmBaseComponent {
   DummyPwm({required super.name, required super.parentPath});

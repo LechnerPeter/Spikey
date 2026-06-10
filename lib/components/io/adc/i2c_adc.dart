@@ -1,6 +1,6 @@
 import 'package:dart_periphery/dart_periphery.dart';
-import 'package:thornstrike/components/io/adc/adc.dart';
-import 'package:thornstrike/logging.dart';
+import 'package:spikey/components/io/adc/adc.dart';
+import 'package:spikey/logging.dart';
 
 class ADCoverI2C extends ADC {
   ADCoverI2C({

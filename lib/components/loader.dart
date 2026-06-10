@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/generic/analog_pwm_connector.dart';
-import 'package:thornstrike/components/generic/switch.dart';
-import 'package:thornstrike/logging.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/generic/analog_pwm_connector.dart';
+import 'package:spikey/components/generic/switch.dart';
+import 'package:spikey/logging.dart';
 
 import 'parameter.dart';
 
@@ -82,7 +82,7 @@ class Loader {
       String raw = await file.readAsString();
       return jsonDecode(raw);
     } catch (e) {
-      Logging.error("FileL Loader Error: ${e.toString()}");
+      Logging.error("File Loader Error: ${e.toString()}");
       return null;
     }
   }

@@ -1,7 +1,7 @@
-import 'package:thornstrike/components/io/io_manager.dart';
-import 'package:thornstrike/components/hardware.dart';
-import 'package:thornstrike/components/ui_settings.dart';
-import 'package:thornstrike/logging.dart';
+import 'package:spikey/components/io/io_manager.dart';
+import 'package:spikey/components/hardware.dart';
+import 'package:spikey/components/ui_settings.dart';
+import 'package:spikey/logging.dart';
 
 import 'component.dart';
 

@@ -24,10 +24,12 @@ class Logging {
     if (consolePrint && kDebugMode) debugPrint(fullStr);
   }
 
-  static void manual(String info) async => await _addEntry(info, .manual);
-  static void info(String info) async => await _addEntry(info, .info);
-  static void warning(String info) async => await _addEntry(info, .warning);
-  static void error(String info) async => await _addEntry(info, .error);
+  static Future<void> manual(String info) async =>
+      await _addEntry(info, .manual);
+  static Future<void> info(String info) async => await _addEntry(info, .info);
+  static Future<void> warning(String info) async =>
+      await _addEntry(info, .warning);
+  static Future<void> error(String info) async => await _addEntry(info, .error);
 }
 
 enum LoggingLevel { info, warning, error, manual }

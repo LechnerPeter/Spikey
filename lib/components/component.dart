@@ -8,7 +8,7 @@ class Component {
     required List<String> parentPath,
     List<Parameter> parameter = const [],
     List<Component> children = const [],
-    List<Component> references = const [],
+    Map<String, Component> references = const {},
     this.isDummy = true,
   }) {
     path.addAll(parentPath);
@@ -22,7 +22,7 @@ class Component {
   List<String> path = [];
   List<Component> children = [];
   List<Parameter> parameter = [];
-  List<Component> references = [];
+  Map<String, Component> references = {};
   final functions = <ComponentFunction>[];
   final widgets = <ComponentWidget>[];
   final bool isDummy;

@@ -1,5 +1,5 @@
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/io/adc/adc.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/io/adc/adc.dart';
 
 class ADCDummy extends ADC {
   ADCDummy({required super.name, required super.parentPath})

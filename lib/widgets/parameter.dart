@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:thornstrike/data.dart';
-import 'package:thornstrike/logging.dart';
+import 'package:spikey/data.dart';
+import 'package:spikey/logging.dart';
 
 import '../components/parameter.dart';
 

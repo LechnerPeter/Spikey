@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:thornstrike/components/component.dart';
-import 'package:thornstrike/components/loader.dart';
+import 'package:spikey/components/component.dart';
+import 'package:spikey/components/loader.dart';
 
 class Hardware extends Component {
   Hardware({

@@ -1,4 +1,4 @@
-package com.example.thornstrike
+package com.example.spikey
 
 import io.flutter.embedding.android.FlutterActivity
 
