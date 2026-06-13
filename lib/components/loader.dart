@@ -28,7 +28,9 @@ class Loader {
       parameter = [];
     }
 
-    Logging.info("Initialising: $path with Parameters $parameter");
+    Logging.info(
+      "Initialising: $path with Parameters ${[for (var p in parameter) p.name]}",
+    );
     String? type = json["type"];
     switch (type) {
       case "switch":

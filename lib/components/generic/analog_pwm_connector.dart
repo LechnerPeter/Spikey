@@ -15,6 +15,7 @@ class AnalogPwmConnector extends Component {
   }) {
     adc.state.addListener(() => pwm.duty.value = adc.normalized);
     references.addAll({"ADC": adc, "PWM": pwm});
+    pwm.setEnabled(true);
   }
 
   final PwmBaseComponent pwm;

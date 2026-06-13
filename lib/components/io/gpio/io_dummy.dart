@@ -4,10 +4,18 @@ import 'package:spikey/components/io/gpio/io.dart';
 class DummyReadComponent extends IOReadComponent {
   DummyReadComponent({required super.name, required super.parentPath}) {
     functions.addAll([
-      ComponentFunction(name: "Fake ON", function: () => state.value = true),
-      ComponentFunction(name: "Fake OFF", function: () => state.value = false),
-      ComponentFunction(name: "1sec cycle", function: () => _start()),
-      ComponentFunction(name: "Stop cycle", function: () => _stop()),
+      ComponentFunction(
+        name: "Fake ON",
+        function: () => state.value = true,
+        parentPath: path,
+      ),
+      ComponentFunction(
+        name: "Fake OFF",
+        function: () => state.value = false,
+        parentPath: path,
+      ),
+      ComponentFunction(name: "1sec cycle", function: _start, parentPath: path),
+      ComponentFunction(name: "Stop cycle", function: _stop, parentPath: path),
     ]);
   }
 

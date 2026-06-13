@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:spikey/data.dart';
 import 'package:spikey/logging.dart';
+import 'package:spikey/widgets/popup.dart';
 
 import '../components/parameter.dart';
 
@@ -13,7 +13,7 @@ class ParameterWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     dynamic value = useValueListenable(parameter);
-    Widget change = _Change(parameter: parameter);
+    Widget change = ChangeParameter(parameter: parameter);
 
     return Container(
       color: Colors.lightGreen.shade300,
@@ -31,8 +31,8 @@ class ParameterWidget extends HookWidget {
   }
 }
 
-class _Change extends HookWidget {
-  const _Change({required this.parameter});
+class ChangeParameter extends HookWidget {
+  const ChangeParameter({super.key, required this.parameter});
 
   final Parameter<dynamic> parameter;
 
@@ -62,13 +62,15 @@ class _PopupNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text("Change"),
-      onPressed: () async {
-        final value = await showDialog<num>(
-          context: context,
-          builder: (context) => _Inner(initial: parameter.value.toString()),
-        );
+    return PopupButton<num>(
+      child: Container(
+        color: Colors.grey.shade200,
+        width: 60,
+        height: 30,
+        child: Center(child: Text("Change")),
+      ),
+      builder: (context) => _Inner(initial: parameter.value.toString()),
+      after: (value) {
         if (value == null) return;
         switch (parameter) {
           case Parameter<int> _:
@@ -91,58 +93,75 @@ class _Inner extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final text = useState<String>(initial);
-    return RotatedBox(
-      quarterTurns: Data.instance.main.settings.rotation.value,
-      child: Dialog(
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(text.value),
-                  ElevatedButton(
-                    onPressed: () => text.value = text.value.substring(
-                      0,
-                      text.value.length - 1,
+    return Center(
+      child: Container(
+        width: 200,
+        height: 200,
+        color: Colors.white,
+        child: Padding(
+          padding: .all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 110,
+                      child: Align(
+                        alignment: .centerRight,
+                        child: Text(text.value),
+                      ),
                     ),
-                    child: Text("<-"),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  _Button(text: text, char: "1"),
-                  _Button(text: text, char: "2"),
-                  _Button(text: text, char: "3"),
-                ],
-              ),
-              Row(
-                children: [
-                  _Button(text: text, char: "4"),
-                  _Button(text: text, char: "5"),
-                  _Button(text: text, char: "6"),
-                ],
-              ),
-              Row(
-                children: [
-                  _Button(text: text, char: "7"),
-                  _Button(text: text, char: "8"),
-                  _Button(text: text, char: "9"),
-                ],
-              ),
-              Row(
-                children: [
-                  _Button(text: text, char: "."),
-                  _Button(text: text, char: "0"),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context, num.tryParse(text.value));
-                    },
-                    child: Text("OK"),
-                  ),
-                ],
-              ),
-            ],
+                    ElevatedButton(
+                      onPressed: () => text.value = text.value.substring(
+                        0,
+                        text.value.length - 1,
+                      ),
+                      child: Text("<-"),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    _Button(text: text, char: "1"),
+                    _Button(text: text, char: "2"),
+                    _Button(text: text, char: "3"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    _Button(text: text, char: "4"),
+                    _Button(text: text, char: "5"),
+                    _Button(text: text, char: "6"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    _Button(text: text, char: "7"),
+                    _Button(text: text, char: "8"),
+                    _Button(text: text, char: "9"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    _Button(text: text, char: "."),
+                    _Button(text: text, char: "0"),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context, num.tryParse(text.value));
+                      },
+                      child: Text("OK"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

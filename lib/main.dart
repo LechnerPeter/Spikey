@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spikey/components/component.dart';
+import 'package:spikey/curated.dart';
 import 'package:spikey/data.dart';
 import 'package:spikey/logging.dart';
 import 'package:spikey/widgets/popup.dart';
@@ -73,35 +74,13 @@ class Spikey extends HookWidget {
             physics: const NeverScrollableScrollPhysics(),
             controller: pc,
             children: [
-              _Display(main: main),
+              Curated(main: main),
               _Components(main: main),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class _Display extends HookWidget {
-  const _Display({required this.main});
-
-  final Component main;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Wrap(children: [for (var w in getAll(main)) w.builder(context)]),
-    );
-  }
-
-  List<ComponentWidget> getAll(Component component) {
-    final ret = <ComponentWidget>[];
-    ret.addAll(component.widgets);
-    for (var c in component.children) {
-      ret.addAll(getAll(c));
-    }
-    return ret;
   }
 }
 

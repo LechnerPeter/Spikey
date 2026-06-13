@@ -34,6 +34,7 @@ class PersistentParameter<T> extends Parameter<T> {
   }
 
   T fromString(String str) {
+    if (T == bool) return (str == "true") as T;
     if (T == String) return str as T;
     if (T == int) return int.parse(str) as T;
     if (T == double) return double.parse(str) as T;
@@ -43,6 +44,7 @@ class PersistentParameter<T> extends Parameter<T> {
   }
 
   String stringify(T val) {
+    if (T == bool) return val.toString();
     if (T == String) return val.toString();
     if (T == int) return val.toString();
     if (T == double) return val.toString();

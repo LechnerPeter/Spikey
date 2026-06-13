@@ -5,8 +5,16 @@ class ADCDummy extends ADC {
   ADCDummy({required super.name, required super.parentPath})
     : super(min: 0, max: 4095) {
     functions.addAll([
-      ComponentFunction(name: "Start Loop", function: _startLoop),
-      ComponentFunction(name: "Stop Loop", function: _stopLoop),
+      ComponentFunction(
+        name: "Start Loop",
+        function: _startLoop,
+        parentPath: path,
+      ),
+      ComponentFunction(
+        name: "Stop Loop",
+        function: _stopLoop,
+        parentPath: path,
+      ),
     ]);
   }
 

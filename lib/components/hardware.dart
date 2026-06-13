@@ -8,7 +8,9 @@ class Hardware extends Component {
     required super.name,
     required super.parentPath,
   }) {
-    functions.addAll([ComponentFunction(name: "Load", function: load)]);
+    functions.addAll([
+      ComponentFunction(name: "Load", function: load, parentPath: path),
+    ]);
     load();
   }
 

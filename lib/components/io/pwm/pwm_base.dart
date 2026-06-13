@@ -17,22 +17,33 @@ abstract class PwmBaseComponent extends Component {
     init();
 
     functions.addAll([
-      ComponentFunction(name: "ON", function: () => enabled.value = true),
-      ComponentFunction(name: "OFF", function: () => enabled.value = false),
+      ComponentFunction(
+        name: "ON",
+        function: () => enabled.value = true,
+        parentPath: path,
+      ),
+      ComponentFunction(
+        name: "OFF",
+        function: () => enabled.value = false,
+        parentPath: path,
+      ),
       ComponentFunction(
         name: "Halve",
         function: () => frequency.value = (frequency.value / 2).round(),
+        parentPath: path,
       ),
       ComponentFunction(
         name: "Double",
         function: () => frequency.value = frequency.value * 2,
+        parentPath: path,
       ),
     ]);
 
     widgets.add(
       ComponentWidget(
         name: "Slider",
-        builder: (context) => _Slider(pwm: this),
+        builder: (_) => _Slider(pwm: this),
+        parentPath: path,
       ),
     );
   }
@@ -55,25 +66,16 @@ class _Slider extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final on = useValueListenable(pwm.enabled);
-    return Container(
-      decoration: BoxDecoration(border: BoxBorder.all(width: 1)),
-      width: 290,
+    return SizedBox(
+      width: 190,
       child: Column(
         children: [
-          Text(pwm.name),
-          Row(
-            children: [
-              Switch(
-                onChanged: (value) => pwm.enabled.value = value,
-                value: on,
-              ),
-              Slider(
-                value: useValueListenable(pwm.duty),
-                onChanged: on ? (value) => pwm.duty.value = value : null,
-                min: 0,
-                max: 1,
-              ),
-            ],
+          Switch(onChanged: (value) => pwm.enabled.value = value, value: on),
+          Slider(
+            value: useValueListenable(pwm.duty),
+            onChanged: on ? (value) => pwm.duty.value = value : null,
+            min: 0,
+            max: 1,
           ),
         ],
       ),

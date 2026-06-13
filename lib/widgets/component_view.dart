@@ -28,6 +28,25 @@ class ComponentView extends StatelessWidget {
         if (component.references.isNotEmpty) const Text("References"),
         for (var r in component.references.entries)
           _Reference(reference: r.key, component: r.value),
+        if (component.widgets.isNotEmpty) const Text("Widgets"),
+        Wrap(children: [for (var w in component.widgets) _Widget(widget: w)]),
+      ],
+    );
+  }
+}
+
+class _Widget extends StatelessWidget {
+  const _Widget({required this.widget});
+
+  final ComponentWidget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(widget.name),
+        widget.builder(context),
+        ChangeParameter(parameter: widget.show),
       ],
     );
   }
@@ -59,9 +78,14 @@ class _Function extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: useValueListenable(fun.enabled) ? () => fun.function() : null,
-      child: Text(fun.name),
+    return Column(
+      children: [
+        FunctionWidget(function: fun),
+        Switch(
+          value: useValueListenable(fun.show),
+          onChanged: (value) => fun.show.value = value,
+        ),
+      ],
     );
   }
 }

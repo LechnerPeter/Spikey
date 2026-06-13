@@ -13,6 +13,7 @@ class RpiPwmComponent extends PwmBaseComponent {
       ComponentFunction(
         name: "Info",
         function: () => Logging.manual(pwm.getPWMinfo()),
+        parentPath: path,
       ),
     ]);
   }

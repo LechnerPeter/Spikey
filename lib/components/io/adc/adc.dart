@@ -14,6 +14,7 @@ class ADC extends Component {
       ComponentFunction(
         name: "Read",
         function: () => Logging.manual(state.value.toString()),
+        parentPath: path,
       ),
     ]);
 
@@ -21,6 +22,7 @@ class ADC extends Component {
       ComponentWidget(
         name: "State",
         builder: (c) => _State(adc: this),
+        parentPath: path,
       ),
     ]);
   }
@@ -39,12 +41,24 @@ class _State extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = useValueListenable(adc.state);
-    return Container(
-      decoration: BoxDecoration(border: .all(width: 1)),
-      width: 50,
-      height: 50,
-      child: Center(child: Text(state.toString())),
+    useListenable(adc.state);
+    return Stack(
+      children: [
+        Positioned(
+          bottom: 0,
+          child: Container(
+            height: 50 * adc.normalized,
+            width: 50,
+            color: Colors.lightBlue.shade300,
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(border: .all(width: 1)),
+          width: 50,
+          height: 50,
+          child: Center(child: Text((adc.normalized * 100).toStringAsFixed(0))),
+        ),
+      ],
     );
   }
 }

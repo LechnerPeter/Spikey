@@ -12,6 +12,7 @@ abstract class IOReadComponent extends Component {
       ComponentFunction(
         name: "Log Value",
         function: () => Logging.manual(state.value.toString()),
+        parentPath: path,
       ),
     ]);
 
@@ -19,6 +20,7 @@ abstract class IOReadComponent extends Component {
       ComponentWidget(
         name: "Switch",
         builder: (_) => _Read(gpio: this),
+        parentPath: path,
       ),
     );
   }
@@ -33,8 +35,7 @@ class _Read extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: BoxBorder.all(width: 1)),
+    return SizedBox(
       width: 60,
       child: Column(
         children: [
@@ -52,14 +53,23 @@ abstract class IOWriteComponent extends Component {
 
     state.addListener(() => state.value ? turnOn() : turnOff());
     functions.addAll([
-      ComponentFunction(name: "ON", function: () => state.value = true),
-      ComponentFunction(name: "OFF", function: () => state.value = false),
+      ComponentFunction(
+        name: "ON",
+        function: () => state.value = true,
+        parentPath: path,
+      ),
+      ComponentFunction(
+        name: "OFF",
+        function: () => state.value = false,
+        parentPath: path,
+      ),
     ]);
 
     widgets.add(
       ComponentWidget(
         name: "Switch",
         builder: (context) => _Write(gpio: this),
+        parentPath: path,
       ),
     );
   }
@@ -78,8 +88,7 @@ class _Write extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: BoxBorder.all(width: 1)),
+    return SizedBox(
       width: 60,
       child: Column(
         children: [

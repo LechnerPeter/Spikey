@@ -10,7 +10,9 @@ class PwmI2CComponent extends PwmBaseComponent {
     required this.i2c,
     required this.index,
   }) {
-    functions.addAll([ComponentFunction(name: "Info", function: printMemory)]);
+    functions.addAll([
+      ComponentFunction(name: "Info", function: printMemory, parentPath: path),
+    ]);
   }
 
   final I2C i2c;
