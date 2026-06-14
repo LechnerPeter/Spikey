@@ -19,7 +19,7 @@ class Component {
   }
 
   final String name;
-  List<String> path = [];
+  final List<String> path = [];
   List<Component> children = [];
   List<Parameter> parameter = [];
   Map<String, Component> references = {};

@@ -48,9 +48,21 @@ abstract class PwmBaseComponent extends Component {
     );
   }
 
-  final frequency = Parameter<int>(name: "Frequency", value: 1_000);
-  final duty = Parameter<double>(name: "Duty", value: 0.5);
-  final enabled = Parameter<bool>(name: "Enabled", value: false);
+  late final frequency = Parameter<int>(
+    name: "Frequency",
+    value: 1_000,
+    parentPath: path,
+  );
+  late final duty = Parameter<double>(
+    name: "Duty",
+    value: 0.5,
+    parentPath: path,
+  );
+  late final enabled = Parameter<bool>(
+    name: "Enabled",
+    value: false,
+    parentPath: path,
+  );
 
   void init();
   void setEnabled(bool state);

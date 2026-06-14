@@ -25,7 +25,11 @@ abstract class IOReadComponent extends Component {
     );
   }
 
-  final state = Parameter<bool>(name: "State", value: false);
+  late final state = Parameter<bool>(
+    name: "State",
+    value: false,
+    parentPath: path,
+  );
 }
 
 class _Read extends HookWidget {
@@ -74,7 +78,11 @@ abstract class IOWriteComponent extends Component {
     );
   }
 
-  final state = Parameter<bool>(name: "State", value: false);
+  late final state = Parameter<bool>(
+    name: "State",
+    value: false,
+    parentPath: path,
+  );
 
   void turnOn();
 

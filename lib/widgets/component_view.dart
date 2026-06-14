@@ -22,7 +22,7 @@ class ComponentView extends StatelessWidget {
         ),
         Text(component.path.toString()),
         Wrap(
-          children: [for (var fun in component.functions) _Function(fun: fun)],
+          children: [for (var f in component.functions) _Function(function: f)],
         ),
         for (var p in component.parameter) ParameterWidget(parameter: p),
         if (component.references.isNotEmpty) const Text("References"),
@@ -72,18 +72,18 @@ class _Reference extends StatelessWidget {
 }
 
 class _Function extends HookWidget {
-  const _Function({required this.fun});
+  const _Function({required this.function});
 
-  final ComponentFunction fun;
+  final ComponentFunction function;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FunctionWidget(function: fun),
+        FunctionWidget(function: function),
         Switch(
-          value: useValueListenable(fun.show),
-          onChanged: (value) => fun.show.value = value,
+          value: useValueListenable(function.show),
+          onChanged: (value) => function.show.value = value,
         ),
       ],
     );

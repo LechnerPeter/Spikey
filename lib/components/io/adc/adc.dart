@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:spikey/components/component.dart';
+import 'package:spikey/components/parameter.dart';
 import 'package:spikey/logging.dart';
 
 class ADC extends Component {
@@ -27,7 +28,7 @@ class ADC extends Component {
     ]);
   }
 
-  final state = ValueNotifier<int>(0);
+  late final state = Parameter<int>(value: 0, parentPath: path, name: 'State');
   final num min;
   final num max;
 

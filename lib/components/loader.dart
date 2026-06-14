@@ -23,7 +23,7 @@ class Loader {
     }
     final List<Parameter> parameter;
     if (json.containsKey("parameter")) {
-      parameter = [for (var p in json["parameter"]) Loader.parameter(p)];
+      parameter = [for (var p in json["parameter"]) Loader.parameter(p, path)];
     } else {
       parameter = [];
     }
@@ -62,12 +62,16 @@ class Loader {
     }
   }
 
-  static Parameter parameter(Map<String, dynamic> json) {
+  static Parameter parameter(
+    Map<String, dynamic> json,
+    List<String> parentPath,
+  ) {
     switch (json["type"]) {
       case "int":
         return Parameter<int>(
           name: json["name"],
           value: json["default"] as int,
+          parentPath: parentPath,
         );
       default:
         throw Exception("Parameter type does not exist ${json["type"]}");
