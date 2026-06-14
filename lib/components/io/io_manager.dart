@@ -7,7 +7,7 @@ import 'package:spikey/components/io/gpio/io_dummy.dart';
 import 'package:spikey/components/io/gpio/rpi_io.dart';
 import 'package:spikey/components/io/pwm/pwm_dummy.dart';
 import 'package:spikey/components/io/pwm/pwm_i2c.dart';
-import 'package:spikey/components/io/pwm/pwm.dart';
+import 'package:spikey/components/io/pwm/rpi_pwm.dart';
 import 'package:spikey/logging.dart';
 
 class DFRobotIOHat extends Component {

@@ -22,11 +22,11 @@ class ParameterWidget extends HookWidget {
           Text(parameter.name),
           Text(parameter.runtimeType.toString()),
           Text(value.toString()),
+          ChangeParameter(parameter: parameter),
           Switch(
             value: useValueListenable(parameter.show),
             onChanged: (value) => parameter.show.value = value,
           ),
-          ChangeParameter(parameter: parameter),
         ],
       ),
     );

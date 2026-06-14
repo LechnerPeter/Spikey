@@ -1,6 +1,6 @@
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/adc/adc.dart';
-import 'package:spikey/components/io/pwm/pwm_base.dart';
+import 'package:spikey/components/io/pwm/pwm.dart';
 import 'package:spikey/components/parameter.dart';
 import 'package:spikey/data.dart';
 

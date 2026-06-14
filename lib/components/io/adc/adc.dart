@@ -26,6 +26,7 @@ class ADC extends Component {
         parentPath: path,
       ),
     ]);
+    parameter.add(state);
   }
 
   late final state = Parameter<int>(value: 0, parentPath: path, name: 'State');

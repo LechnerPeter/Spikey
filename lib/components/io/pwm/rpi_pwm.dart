@@ -1,6 +1,6 @@
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:spikey/components/component.dart';
-import 'package:spikey/components/io/pwm/pwm_base.dart';
+import 'package:spikey/components/io/pwm/pwm.dart';
 import 'package:spikey/logging.dart';
 
 class RpiPwmComponent extends PwmBaseComponent {
