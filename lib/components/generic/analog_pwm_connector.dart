@@ -19,8 +19,8 @@ class AnalogPwmConnector extends Component {
     pwm.enabled.value = true;
   }
 
-  final PwmBaseComponent pwm;
-  final ADC adc;
+  final PwmBase pwm;
+  final ADCBase adc;
 
   factory AnalogPwmConnector.create({
     required String name,
@@ -29,8 +29,8 @@ class AnalogPwmConnector extends Component {
     List<Component> children = const [],
     List<Parameter> parameter = const [],
   }) {
-    final pwm = Data.getComponent<PwmBaseComponent>(json["pwm"]);
-    final adc = Data.getComponent<ADC>(json["adc"]);
+    final pwm = Data.getComponent<PwmBase>(json["pwm"]);
+    final adc = Data.getComponent<ADCBase>(json["adc"]);
     return AnalogPwmConnector(
       name: name,
       parentPath: parentPath,

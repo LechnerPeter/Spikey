@@ -17,8 +17,8 @@ class Switch extends Component {
     references.addAll({"Input": input, "Output": output});
   }
 
-  final IOReadComponent input;
-  final IOWriteComponent output;
+  final IORead input;
+  final IOWrite output;
 
   factory Switch.create({
     required String name,
@@ -27,8 +27,8 @@ class Switch extends Component {
     List<Component> children = const [],
     List<Parameter> parameter = const [],
   }) {
-    final input = Data.getComponent<IOReadComponent>(json["input"]);
-    final output = Data.getComponent<IOWriteComponent>(json["output"]);
+    final input = Data.getComponent<IORead>(json["input"]);
+    final output = Data.getComponent<IOWrite>(json["output"]);
     return Switch(
       name: name,
       parentPath: parentPath,

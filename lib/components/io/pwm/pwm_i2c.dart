@@ -3,7 +3,7 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/pwm/pwm.dart';
 import 'package:spikey/logging.dart';
 
-class PwmI2CComponent extends PwmBaseComponent {
+class PwmI2CComponent extends PwmBase {
   PwmI2CComponent({
     required super.name,
     required super.parentPath,

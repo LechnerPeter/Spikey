@@ -2,7 +2,7 @@ import 'package:dart_periphery/dart_periphery.dart';
 import 'package:spikey/components/io/adc/adc.dart';
 import 'package:spikey/logging.dart';
 
-class ADCoverI2C extends ADC {
+class ADCoverI2C extends ADCBase {
   ADCoverI2C({
     required super.name,
     required super.parentPath,

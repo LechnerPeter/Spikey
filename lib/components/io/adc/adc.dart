@@ -4,8 +4,8 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/parameter.dart';
 import 'package:spikey/logging.dart';
 
-class ADC extends Component {
-  ADC({
+class ADCBase extends Component {
+  ADCBase({
     required super.name,
     required super.parentPath,
     required this.min,
@@ -40,7 +40,7 @@ class ADC extends Component {
 class _State extends HookWidget {
   const _State({required this.adc});
 
-  final ADC adc;
+  final ADCBase adc;
 
   @override
   Widget build(BuildContext context) {

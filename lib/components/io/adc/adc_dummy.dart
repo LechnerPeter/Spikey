@@ -1,9 +1,9 @@
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/adc/adc.dart';
 
-class ADCDummy extends ADC {
+class ADCDummy extends ADCBase {
   ADCDummy({required super.name, required super.parentPath})
-    : super(min: 0, max: 4095) {
+    : super(min: 0, max: 4095, isDummy: true) {
     functions.addAll([
       ComponentFunction(
         name: "Start Loop",

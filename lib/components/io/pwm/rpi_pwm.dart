@@ -3,7 +3,7 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/pwm/pwm.dart';
 import 'package:spikey/logging.dart';
 
-class RpiPwmComponent extends PwmBaseComponent {
+class RpiPwmComponent extends PwmBase {
   RpiPwmComponent({
     required super.name,
     required super.parentPath,

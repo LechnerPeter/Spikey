@@ -3,12 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/parameter.dart';
 
-abstract class PwmBaseComponent extends Component {
-  PwmBaseComponent({
-    required super.name,
-    required super.parentPath,
-    super.isDummy,
-  }) {
+abstract class PwmBase extends Component {
+  PwmBase({required super.name, required super.parentPath, super.isDummy}) {
     parameter.addAll([frequency, duty, enabled]);
 
     enabled.addListener(() => setEnabled(enabled.value));
@@ -75,7 +71,7 @@ abstract class PwmBaseComponent extends Component {
 class _Slider extends HookWidget {
   const _Slider({required this.pwm});
 
-  final PwmBaseComponent pwm;
+  final PwmBase pwm;
 
   @override
   Widget build(BuildContext context) {

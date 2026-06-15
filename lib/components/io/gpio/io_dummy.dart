@@ -1,7 +1,7 @@
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/gpio/io.dart';
 
-class DummyReadComponent extends IOReadComponent {
+class DummyReadComponent extends IORead {
   DummyReadComponent({
     required super.name,
     required super.parentPath,
@@ -40,7 +40,7 @@ class DummyReadComponent extends IOReadComponent {
   }
 }
 
-class DummyWriteComponent extends IOWriteComponent {
+class DummyWriteComponent extends IOWrite {
   DummyWriteComponent({required super.name, required super.parentPath});
 
   @override

@@ -15,7 +15,7 @@ class Parameter<T> extends ValueNotifier<T> {
     );
     final data = Data.memory.getString(_showPath());
     if (data != null) show.value = data == "true";
-    userEditable = true;
+    this.userEditable.value = userEditable;
   }
 
   final String name;

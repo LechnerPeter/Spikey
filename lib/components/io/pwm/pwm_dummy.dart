@@ -1,6 +1,6 @@
 import 'package:spikey/components/io/pwm/pwm.dart';
 
-class DummyPwm extends PwmBaseComponent {
+class DummyPwm extends PwmBase {
   DummyPwm({
     required super.name,
     required super.parentPath,

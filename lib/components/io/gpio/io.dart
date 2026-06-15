@@ -5,12 +5,8 @@ import 'package:spikey/logging.dart';
 
 import '../../parameter.dart';
 
-abstract class IOReadComponent extends Component {
-  IOReadComponent({
-    required super.name,
-    required super.parentPath,
-    super.isDummy,
-  }) {
+abstract class IORead extends Component {
+  IORead({required super.name, required super.parentPath, super.isDummy}) {
     parameter.add(state);
     functions.addAll([
       ComponentFunction(
@@ -39,7 +35,7 @@ abstract class IOReadComponent extends Component {
 class _Read extends HookWidget {
   const _Read({required this.gpio});
 
-  final IOReadComponent gpio;
+  final IORead gpio;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +51,8 @@ class _Read extends HookWidget {
   }
 }
 
-abstract class IOWriteComponent extends Component {
-  IOWriteComponent({required super.name, required super.parentPath}) {
+abstract class IOWrite extends Component {
+  IOWrite({required super.name, required super.parentPath}) {
     parameter.add(state);
 
     state.addListener(() => state.value ? turnOn() : turnOff());
@@ -96,7 +92,7 @@ abstract class IOWriteComponent extends Component {
 class _Write extends HookWidget {
   const _Write({required this.gpio});
 
-  final IOWriteComponent gpio;
+  final IOWrite gpio;
 
   @override
   Widget build(BuildContext context) {
