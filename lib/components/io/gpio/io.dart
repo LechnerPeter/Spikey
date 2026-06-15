@@ -6,7 +6,11 @@ import 'package:spikey/logging.dart';
 import '../../parameter.dart';
 
 abstract class IOReadComponent extends Component {
-  IOReadComponent({required super.name, required super.parentPath}) {
+  IOReadComponent({
+    required super.name,
+    required super.parentPath,
+    super.isDummy,
+  }) {
     parameter.add(state);
     functions.addAll([
       ComponentFunction(

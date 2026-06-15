@@ -10,6 +10,7 @@ class ADC extends Component {
     required super.parentPath,
     required this.min,
     required this.max,
+    super.isDummy,
   }) {
     functions.addAll([
       ComponentFunction(

@@ -10,6 +10,7 @@ class Component {
     List<Parameter> parameter = const [],
     List<Component> children = const [],
     Map<String, Component> references = const {},
+    this.isDummy = false,
   }) {
     path.addAll(parentPath);
     path.add(name);
@@ -26,6 +27,8 @@ class Component {
   final functions = <ComponentFunction>[];
   final widgets = <ComponentWidget>[];
   final changed = ValueNotifier(false);
+
+  final bool isDummy;
 
   bool hasCurated() =>
       functions.any((f) => f.show.value) || widgets.any((w) => w.show.value);

@@ -4,7 +4,11 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/parameter.dart';
 
 abstract class PwmBaseComponent extends Component {
-  PwmBaseComponent({required super.name, required super.parentPath}) {
+  PwmBaseComponent({
+    required super.name,
+    required super.parentPath,
+    super.isDummy,
+  }) {
     parameter.addAll([frequency, duty, enabled]);
 
     enabled.addListener(() => setEnabled(enabled.value));

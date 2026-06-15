@@ -2,7 +2,11 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/gpio/io.dart';
 
 class DummyReadComponent extends IOReadComponent {
-  DummyReadComponent({required super.name, required super.parentPath}) {
+  DummyReadComponent({
+    required super.name,
+    required super.parentPath,
+    super.isDummy = true,
+  }) {
     functions.addAll([
       ComponentFunction(
         name: "Fake ON",

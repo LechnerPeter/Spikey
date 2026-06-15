@@ -7,26 +7,24 @@ class Parameter<T> extends ValueNotifier<T> {
     required this.name,
     required T value,
     required List<String> parentPath,
+    bool userEditable = false,
   }) : super(value = value) {
     path = [...parentPath, name];
     show.addListener(
-      () =>
-          Data.memory.setString(_showPath().toString(), show.value.toString()),
+      () => Data.memory.setString(_showPath(), show.value.toString()),
     );
-    init();
+    final data = Data.memory.getString(_showPath());
+    if (data != null) show.value = data == "true";
+    userEditable = true;
   }
 
   final String name;
   late final List<String> path;
   final show = ValueNotifier<bool>(false);
+  final userEditable = ValueNotifier(false);
 
-  void init() {
-    final data = Data.memory.getString(_showPath().toString());
-    if (data != null) show.value = data == "true";
-  }
-
-  List<String> _showPath() {
-    return [...path, "Show"];
+  String _showPath() {
+    return [...path, "Show"].toString();
   }
 }
 
@@ -35,21 +33,17 @@ class PersistentParameter<T> extends Parameter<T> {
     required super.name,
     required super.value,
     required super.parentPath,
-  });
+  }) {
+    final data = Data.memory.getString(path.toString());
+    if (data != null) {
+      value = fromString(data);
+    }
+  }
 
   @override
   set value(T newValue) {
     Data.memory.setString(path.toString(), stringify(newValue));
     super.value = newValue;
-  }
-
-  @override
-  void init() {
-    super.init();
-    final data = Data.memory.getString(path.toString());
-    if (data != null) {
-      value = fromString(data);
-    }
   }
 
   T fromString(String str) {

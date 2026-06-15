@@ -12,6 +12,7 @@ class ParameterWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final edit = useValueListenable(parameter.userEditable);
     dynamic value = useValueListenable(parameter);
     return Container(
       color: Colors.lightGreen.shade300,
@@ -22,7 +23,7 @@ class ParameterWidget extends HookWidget {
           Text(parameter.name),
           Text(parameter.runtimeType.toString()),
           Text(value.toString()),
-          ChangeParameter(parameter: parameter),
+          if (edit) ChangeParameter(parameter: parameter),
           Switch(
             value: useValueListenable(parameter.show),
             onChanged: (value) => parameter.show.value = value,
