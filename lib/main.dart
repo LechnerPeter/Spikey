@@ -12,20 +12,40 @@ import 'widgets/component_view.dart';
 import 'widgets/component_tree.dart';
 
 void main() async {
-  Logging.manual("Test Manual");
-  Logging.info("Test Info");
-  Logging.warning("Test Warning");
-  Logging.error("Test Error");
   WidgetsFlutterBinding.ensureInitialized();
   Data.memory = await SharedPreferences.getInstance();
-  runApp(const Spikey());
+  runApp(_LoggingInit());
+}
+
+class _LoggingInit extends HookWidget {
+  const _LoggingInit();
+
+  @override
+  Widget build(BuildContext context) {
+    final messengerKey = useMemoized(() => GlobalKey<ScaffoldMessengerState>());
+    final ready = useState(false);
+
+    useEffect(() {
+      Logging.messengerKey = messengerKey;
+      WidgetsBinding.instance.addPostFrameCallback((_) => ready.value = true);
+      return null;
+    }, []);
+
+    if (!ready.value) {
+      return const MaterialApp(
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
+      );
+    }
+    return Spikey(messengerKey: messengerKey);
+  }
 }
 
 class Spikey extends HookWidget {
-  const Spikey({super.key});
+  const Spikey({super.key, required this.messengerKey});
 
   final duration = Durations.medium1;
   final curve = Curves.easeInOut;
+  final GlobalKey<ScaffoldMessengerState> messengerKey;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +53,7 @@ class Spikey extends HookWidget {
     final pc = usePageController();
     final page = useState<int>(0);
     return MaterialApp(
+      scaffoldMessengerKey: messengerKey,
       title: 'Spikey',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.green)),
       home: RotatedBox(
