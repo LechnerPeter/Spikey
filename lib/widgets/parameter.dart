@@ -18,12 +18,18 @@ class ParameterWidget extends HookWidget {
       color: Colors.lightGreen.shade300,
       height: 40,
       child: Row(
-        mainAxisAlignment: .spaceAround,
+        mainAxisAlignment: .spaceBetween,
         children: [
-          Text(parameter.name),
-          Text(parameter.runtimeType.toString()),
-          Text(value.toString()),
-          if (edit) ChangeParameter(parameter: parameter),
+          Expanded(
+            child: Padding(
+              padding: .only(left: 8.0),
+              child: Text(parameter.name),
+            ),
+          ),
+          Expanded(child: Text(value.toString())),
+          Expanded(
+            child: edit ? ChangeParameter(parameter: parameter) : SizedBox(),
+          ),
           Switch(
             value: useValueListenable(parameter.show),
             onChanged: (value) => parameter.show.value = value,
@@ -118,10 +124,13 @@ class _Inner extends HookWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () => text.value = text.value.substring(
-                        0,
-                        text.value.length - 1,
-                      ),
+                      onPressed: () {
+                        if (text.value.isEmpty) return;
+                        text.value = text.value.substring(
+                          0,
+                          text.value.length - 1,
+                        );
+                      },
                       child: Text("<-"),
                     ),
                   ],

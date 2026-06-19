@@ -12,8 +12,7 @@ import 'package:spikey/widgets/popup.dart';
 import 'widgets/component_view.dart';
 import 'widgets/component_tree.dart';
 
-final _locked = ValueNotifier<bool>(false);
-void lockScreen() => _locked.value = true;
+void lockScreen() => Data.instance.main.settings.locked.value = true;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,12 +55,15 @@ class Spikey extends HookWidget {
     final main = Data.instance.main;
     final pc = usePageController();
     final page = useState<int>(0);
-    final locked = useValueListenable(_locked);
+    final locked = useValueListenable(main.settings.locked);
     final timerRef = useRef<Timer?>(null);
 
     void restartTimer() {
       timerRef.value?.cancel();
-      timerRef.value = Timer(const Duration(seconds: 15), lockScreen);
+      timerRef.value = Timer(
+        Duration(seconds: main.settings.lockTimeout.value),
+        lockScreen,
+      );
     }
 
     useEffect(() {
@@ -71,6 +73,7 @@ class Spikey extends HookWidget {
 
     useEffect(() {
       if (!locked) restartTimer();
+      main.settings.applyBrightness();
       return null;
     }, [locked]);
 
@@ -97,7 +100,6 @@ class Spikey extends HookWidget {
                   backgroundColor: Colors.lightGreen,
                   title: Text("Spikey", style: TextStyle(fontWeight: .w900)),
                   actions: [
-                    SizedBox(width: 120, child: _BrightnessSlider()),
                     if (!locked)
                       ElevatedButton(
                         onPressed: lockScreen,
@@ -137,63 +139,11 @@ class Spikey extends HookWidget {
                   ],
                 ),
               ),
-              if (locked) _LockScreen(onUnlock: () => _locked.value = false),
+              if (locked)
+                _LockScreen(onUnlock: () => main.settings.locked.value = false),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _BrightnessSlider extends HookWidget {
-  const _BrightnessSlider();
-
-  static String? _backlightDir() {
-    final dir = Directory('/sys/class/backlight');
-    if (!dir.existsSync()) return null;
-    final entries = dir.listSync();
-    return entries.isEmpty ? null : entries.first.path;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final dir = useMemoized(_backlightDir);
-    final maxBrightness = useMemoized(() {
-      if (dir == null) return 255.0;
-      final f = File('$dir/max_brightness');
-      return f.existsSync() ? double.parse(f.readAsStringSync().trim()) : 255.0;
-    });
-    final brightness = useState(128.0);
-
-    useEffect(() {
-      if (dir == null) return null;
-      final f = File('$dir/brightness');
-      if (f.existsSync()) {
-        brightness.value = double.parse(f.readAsStringSync().trim());
-      }
-      return null;
-    }, const []);
-
-    return SliderTheme(
-      data: SliderTheme.of(context).copyWith(
-        trackHeight: 4,
-        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6),
-      ),
-      child: Slider(
-        value: brightness.value,
-        min: (maxBrightness / 10).roundToDouble(),
-        max: maxBrightness,
-        onChanged: (v) {
-          brightness.value = v;
-          if (dir != null) {
-            try {
-              File('$dir/brightness').writeAsStringSync(v.round().toString());
-            } catch (e) {
-              Logging.error('Brightness write failed: $e');
-            }
-          }
-        },
       ),
     );
   }
@@ -223,19 +173,16 @@ class _LockScreen extends HookWidget {
         color: Colors.transparent,
         child: Align(
           alignment: .bottomCenter,
-          child: Column(
-            mainAxisAlignment: .end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Transform.translate(
-                offset: Offset(offset.value, -30),
-                child: Icon(
-                  Icons.lock,
-                  size: 64,
-                  color: Color.lerp(Colors.black, Colors.green, progress),
-                ),
+          child: Padding(
+            padding: .only(bottom: 30),
+            child: Transform.translate(
+              offset: Offset(offset.value, 0),
+              child: Icon(
+                Icons.lock,
+                size: 64,
+                color: Color.lerp(Colors.black, Colors.green, progress),
               ),
-            ],
+            ),
           ),
         ),
       ),

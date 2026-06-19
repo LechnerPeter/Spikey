@@ -13,8 +13,8 @@ class Parameter<T> extends ValueNotifier<T> {
     show.addListener(
       () => Data.memory.setString(_showPath(), show.value.toString()),
     );
-    final data = Data.memory.getString(_showPath());
-    if (data != null) show.value = data == "true";
+    final showStr = Data.memory.getString(_showPath());
+    if (showStr != null) show.value = showStr == "true";
     this.userEditable.value = userEditable;
   }
 
@@ -23,9 +23,7 @@ class Parameter<T> extends ValueNotifier<T> {
   final show = ValueNotifier<bool>(false);
   final userEditable = ValueNotifier(false);
 
-  String _showPath() {
-    return [...path, "Show"].toString();
-  }
+  String _showPath() => [...path, "Show"].toString();
 }
 
 class PersistentParameter<T> extends Parameter<T> {
@@ -33,11 +31,10 @@ class PersistentParameter<T> extends Parameter<T> {
     required super.name,
     required super.value,
     required super.parentPath,
+    super.userEditable = false,
   }) {
     final data = Data.memory.getString(path.toString());
-    if (data != null) {
-      value = fromString(data);
-    }
+    if (data != null) super.value = fromString(data);
   }
 
   @override

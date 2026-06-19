@@ -31,7 +31,9 @@ class Component {
   final bool isDummy;
 
   bool hasCurated() =>
-      functions.any((f) => f.show.value) || widgets.any((w) => w.show.value);
+      functions.any((f) => f.show.value) ||
+      widgets.any((w) => w.show.value) ||
+      parameter.any((p) => p.show.value);
 
   void ping() => changed.value = !changed.value;
 }

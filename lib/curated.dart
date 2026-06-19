@@ -67,7 +67,7 @@ class _Parameter extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: 200,
       child: Row(
         mainAxisAlignment: .spaceBetween,
         children: [
