@@ -38,6 +38,20 @@
                 "GPIOManager",
                 "GPIO23"
             ]
+        },
+        {
+            "name": "Keepalive",
+            "type": "keepalive",
+            "output": [
+                "Main",
+                "GPIOManager",
+                "GPIO17"
+            ],
+            "controll": [
+                "Main",
+                "GPIOManager",
+                "GPIO24"
+            ]
         }
     ]
 }

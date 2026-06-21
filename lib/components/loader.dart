@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/generic/analog_pwm_connector.dart';
+import 'package:spikey/components/generic/keepalive.dart';
 import 'package:spikey/components/generic/switch.dart';
 import 'package:spikey/logging.dart';
 
@@ -43,6 +44,14 @@ class Loader {
         );
       case "connector":
         return AnalogPwmConnector.create(
+          name: name,
+          parentPath: parent,
+          parameter: parameter,
+          children: children,
+          json: json,
+        );
+      case "keepalive":
+        return Keepalive.create(
           name: name,
           parentPath: parent,
           parameter: parameter,
