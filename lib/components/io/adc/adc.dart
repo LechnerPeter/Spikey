@@ -4,7 +4,7 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/parameter.dart';
 import 'package:spikey/logging.dart';
 
-class ADCBase extends Component {
+abstract class ADCBase extends Component {
   ADCBase({
     required super.name,
     required super.parentPath,
