@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/adc/adc_dummy.dart';
 import 'package:spikey/components/io/adc/i2c_adc.dart';
+import 'package:spikey/components/io/gpio/io.dart';
 import 'package:spikey/components/io/gpio/io_dummy.dart';
 import 'package:spikey/components/io/gpio/rpi_io.dart';
 import 'package:spikey/components/io/pwm/pwm_dummy.dart';
@@ -17,10 +18,23 @@ class DFRobotIOHat extends Component {
     _initI2CPWM();
     _initRPIPWM();
     _initGPIO();
+
+    keepAlive = children.singleWhere((c) => c.name == "GPIO15") as IOWrite;
+    _keepAlive();
   }
 
   final ready = ValueNotifier(false);
   I2C? i2c;
+  late final IOWrite keepAlive;
+
+  Future<void> _keepAlive() async {
+    while (true) {
+      keepAlive.state.value = true;
+      await Future.delayed(Duration(milliseconds: 1000));
+      keepAlive.state.value = false;
+      await Future.delayed(Duration(milliseconds: 1000));
+    }
+  }
 
   bool _initI2C() {
     try {
@@ -66,8 +80,8 @@ class DFRobotIOHat extends Component {
         if ([2, 3, 18, 19].contains(i)) continue;
         children.add(
           i.isEven
-              ? RpiReadComponent(name: "GPIO$i", parentPath: path, index: i)
-              : RpiWriteComponent(name: "GPIO$i", parentPath: path, index: i),
+              ? RpiRead(name: "GPIO$i", parentPath: path, index: i)
+              : RpiWrite(name: "GPIO$i", parentPath: path, index: i),
         );
       }
       Logging.info("IO Done");

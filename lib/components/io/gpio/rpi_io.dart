@@ -1,8 +1,8 @@
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:spikey/components/io/gpio/io.dart';
 
-class RpiReadComponent extends IORead {
-  RpiReadComponent({
+class RpiRead extends IORead {
+  RpiRead({
     required super.name,
     required super.parentPath,
     required this.index,
@@ -30,8 +30,8 @@ class RpiReadComponent extends IORead {
   }
 }
 
-class RpiWriteComponent extends IOWrite {
-  RpiWriteComponent({
+class RpiWrite extends IOWrite {
+  RpiWrite({
     required super.name,
     required super.parentPath,
     required this.index,
