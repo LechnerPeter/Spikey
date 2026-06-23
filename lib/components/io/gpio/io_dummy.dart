@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/gpio/io.dart';
 
@@ -23,20 +25,22 @@ class DummyReadComponent extends IORead {
     ]);
   }
 
-  bool loop = false;
+  Completer<void>? _cancel;
 
   void _start() async {
-    loop = true;
-    while (loop) {
-      state.value = true;
-      await Future.delayed(Duration(seconds: 1));
-      state.value = false;
-      await Future.delayed(Duration(seconds: 1));
+    _cancel = Completer();
+    while (true) {
+      state.value = !state.value;
+      await Future.any([
+        Future.delayed(const Duration(seconds: 1)),
+        _cancel!.future,
+      ]);
+      if (_cancel!.isCompleted) break;
     }
   }
 
   void _stop() {
-    loop = false;
+    _cancel?.complete();
   }
 }
 

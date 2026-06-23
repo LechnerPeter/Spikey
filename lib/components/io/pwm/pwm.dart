@@ -9,7 +9,14 @@ abstract class PwmBase extends Component {
 
     enabled.addListener(() => setEnabled(enabled.value));
     frequency.addListener(() => setFrequency(frequency.value));
-    duty.addListener(() => setDuty(duty.value.clamp(0, 1)));
+    duty.addListener(() {
+      final clamped = duty.value.clamp(0.0, 1.0);
+      if (duty.value != clamped) {
+        duty.value = clamped;
+        return;
+      }
+      setDuty(clamped);
+    });
 
     // init
     init();

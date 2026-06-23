@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:spikey/components/component.dart';
 import 'package:spikey/components/io/adc/adc.dart';
 
@@ -18,17 +20,18 @@ class ADCDummy extends ADCBase {
     ]);
   }
 
-  bool looping = false;
+  Completer<void>? _cancel;
 
   void _startLoop() async {
-    looping = true;
-    while (looping) {
+    _cancel = Completer();
+    while (true) {
       state.value = (state.value + 1) % 4095;
-      await Future.delayed(Duration(milliseconds: 1));
+      await Future.any([Future.delayed(const Duration(milliseconds: 1)), _cancel!.future]);
+      if (_cancel!.isCompleted) break;
     }
   }
 
   void _stopLoop() {
-    looping = false;
+    _cancel?.complete();
   }
 }

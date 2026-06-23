@@ -84,8 +84,12 @@ abstract class IOWrite extends Component {
     parentPath: path,
   );
 
+  /// Do not call directly, change the value of this.state
+  @protected
   void turnOn();
 
+  /// Do not call directly, change the value of this.state
+  @protected
   void turnOff();
 }
 
