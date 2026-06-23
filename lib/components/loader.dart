@@ -5,6 +5,7 @@ import 'package:spikey/components/component.dart';
 import 'package:spikey/components/generic/analog_pwm_connector.dart';
 import 'package:spikey/components/generic/keepalive.dart';
 import 'package:spikey/components/generic/switch.dart';
+import 'package:spikey/data.dart';
 import 'package:spikey/logging.dart';
 
 import 'parameter.dart';
@@ -29,6 +30,16 @@ class Loader {
       parameter = [];
     }
 
+    final Map<String, Component> references;
+    if (json.containsKey("references")) {
+      references = {
+        for (var entry in (json["references"] as Map).entries)
+          entry.key as String: Data.getComponent<Component>(entry.value as List),
+      };
+    } else {
+      references = {};
+    }
+
     Logging.info(
       "Initialising: $path with Parameters ${[for (var p in parameter) p.name]}",
     );
@@ -40,6 +51,7 @@ class Loader {
           parentPath: parent,
           parameter: parameter,
           children: children,
+          references: references,
           json: json,
         );
       case "connector":
@@ -48,6 +60,7 @@ class Loader {
           parentPath: parent,
           parameter: parameter,
           children: children,
+          references: references,
           json: json,
         );
       case "keepalive":
@@ -56,6 +69,7 @@ class Loader {
           parentPath: parent,
           parameter: parameter,
           children: children,
+          references: references,
           json: json,
         );
       default:
@@ -67,6 +81,7 @@ class Loader {
           parentPath: parent,
           parameter: parameter,
           children: children,
+          references: references,
         );
     }
   }

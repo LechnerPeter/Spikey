@@ -10,6 +10,7 @@ class AnalogPwmConnector extends Component {
     required super.parentPath,
     super.children = const [],
     super.parameter = const [],
+    super.references = const {},
     required this.pwm,
     required this.adc,
   }) {
@@ -28,6 +29,7 @@ class AnalogPwmConnector extends Component {
     required Map json,
     List<Component> children = const [],
     List<Parameter> parameter = const [],
+    Map<String, Component> references = const {},
   }) {
     final pwm = Data.getComponent<PwmBase>(json["pwm"]);
     final adc = Data.getComponent<ADCBase>(json["adc"]);
@@ -36,6 +38,7 @@ class AnalogPwmConnector extends Component {
       parentPath: parentPath,
       pwm: pwm,
       adc: adc,
+      references: references,
     );
   }
 }

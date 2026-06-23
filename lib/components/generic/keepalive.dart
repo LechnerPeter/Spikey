@@ -26,6 +26,7 @@ class Keepalive extends Component {
     required Map json,
     List<Component> children = const [],
     List<Parameter> parameter = const [],
+    Map<String, Component> references = const {},
   }) {
     final output = Data.getComponent<IOWrite>(json["output"]);
     final controll = Data.getComponent<IORead>(json["controll"]);
@@ -34,6 +35,7 @@ class Keepalive extends Component {
       parentPath: parentPath,
       children: children,
       parameter: parameter,
+      references: references,
       output: output,
       controll: controll,
     );

@@ -30,6 +30,7 @@ class Hardware extends Component {
     final component = Loader.load(json, path.sublist(0, path.length - 1));
     children.addAll(component.children);
     parameter.addAll(component.parameter);
+    references.addAll(component.references);
     initialised.value = true;
     functions.singleWhere((e) => e.name == "Load").enabled.value = false;
     ping();

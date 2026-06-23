@@ -26,6 +26,7 @@ class Switch extends Component {
     required Map json,
     List<Component> children = const [],
     List<Parameter> parameter = const [],
+    Map<String, Component> references = const {},
   }) {
     final input = Data.getComponent<IORead>(json["input"]);
     final output = Data.getComponent<IOWrite>(json["output"]);
@@ -34,6 +35,7 @@ class Switch extends Component {
       parentPath: parentPath,
       children: children,
       parameter: parameter,
+      references: references,
       input: input,
       output: output,
     );
