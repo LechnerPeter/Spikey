@@ -41,9 +41,7 @@ class Keepalive extends Component {
 
   Future<void> _keepAlive() async {
     while (true) {
-      output.state.value = true;
-      await Future.delayed(Duration(milliseconds: 1000));
-      output.state.value = false;
+      output.state.value = !output.state.value;
       await Future.delayed(Duration(milliseconds: 1000));
     }
   }
